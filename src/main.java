@@ -36,7 +36,6 @@ public class main {
                 coord2 = j;
             }
         }
-        System.out.println(coord1 + "\n" + coord2);
         goTo(coord1, coord2, value);
     }
 
