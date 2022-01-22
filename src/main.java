@@ -1,3 +1,4 @@
+import java.sql.SQLOutput;
 import java.util.Scanner;
 
 public class main {
@@ -8,20 +9,22 @@ public class main {
 
     }
     public void starterMethod() {
+        System.out.println("Rankine, Fahrenheit, Celsius, and Kelvin");
         Scanner scan = new Scanner(System.in);
-
         System.out.println("Enter the unit you would like to convert from: ");
         String from = scan.next();
         char fromUnit = from.charAt(0);
-
+    // takes the input of what you would like to convert to and gets the first character of that string
         System.out.println("Enter the unit you would like to convert to: ");
         String to = scan.next();
         char toUnit = to.charAt(0);
+    // takes the input of what you would like to convert to and gets the first character of that string
 
 
         System.out.println("Enter value: ");
         float value = scan.nextFloat();
         scan.close();
+    // takes the numerical value of what you would like to convert.
 
         char[] index = {'R', 'F', 'C', 'K'};
         int coord1 = 0;
@@ -36,11 +39,12 @@ public class main {
                 coord2 = j;
             }
         }
+    // creates two coordinate points based on the index array.
         goTo(coord1, coord2, value);
     }
 
     public void goTo(int x, int y, double amt) {
-        String[][][] addOrMultiplyMatrix = {{{"M","M","M"},        {"A","M","M"},     {"M","A","M"},   {"M","M","M"}},
+        String[][][] findMatrix =          {{{"M","M","M"},        {"A","M","M"},     {"M","A","M"},   {"M","M","M"}},
                                             {{"S","M","M"},        {"M","M","M"},     {"M","A","M"},   {"S","M","M"}},
                                             {{"S","M","M"},        {"S","M","M"},     {"M","M","M"},   {"S","M","M"}},
                                             {{"M","M","M"},        {"S","M","A"},     {"A","M","M"},   {"M","M","M"}}};
@@ -49,19 +53,28 @@ public class main {
                                             {{491.67,0.55,1.0},    {32,.55,1.0},      {1.0,1.0,1.0},   {273,1.0,1.0}},
                                             {{.55,1.0,1.0},        {32,.55,273.},     {273,1.0,1.0},   {1.0,1.0,1.0}}};
 
-
+    // coordinate points are then used to in the 'findMatrix' matrix to identify what operation of calculation needs to be done
+    // then those same coordinate points are used in the 'conversionRatios' matrix to identify the values that the value inputted needs to
+    // be multiplied, added, or subtracted from.
         for (int z = 0; z < 3; z++) {
-            if (addOrMultiplyMatrix[y][x][z] == "M") {
-                amt = conversionRatios[y][x][z] * amt;
+            switch(findMatrix[y][x][z]){
+                case("M"):
+                    amt = conversionRatios[y][x][z] * amt;
+                    break;
+                case("S"):
+                    amt = amt - conversionRatios[y][x][z];
+                    break;
+                case("A"):
+                    amt = amt + conversionRatios[y][x][z];
+                    break;
             }
-            if (addOrMultiplyMatrix[y][x][z] == "S"){
-                amt = amt - conversionRatios[y][x][z];
-            }
-            if (addOrMultiplyMatrix[y][x][z] == "A"){
-                amt = amt + conversionRatios[y][x][z];
-            }
-        }
+        }/*
+    this code runs through 'findMatrix' to find the calculations needed to be done, and 'conversionRatios' is used to find the value of the
+    multiplying, adding, or subtracting operators, which is determined using the switch case statement.
+    which is determined using the switch case statement.
+    This is all under a for loop that runs 3 times because some conversions require 3 steps to get the final answer.
+    */
+        System.out.println("Your converted temperature: " + amt);
 
-        System.out.println(amt);
     }
 }
