@@ -1,4 +1,3 @@
-import java.sql.SQLOutput;
 import java.util.Scanner;
 
 public class main {
@@ -14,17 +13,17 @@ public class main {
         System.out.println("Enter the unit you would like to convert from: ");
         String from = scan.next();
         char fromUnit = from.charAt(0);
-    // takes the input of what you would like to convert to and gets the first character of that string
+        // takes the input of what you would like to convert to and gets the first character of that string
         System.out.println("Enter the unit you would like to convert to: ");
         String to = scan.next();
         char toUnit = to.charAt(0);
-    // takes the input of what you would like to convert to and gets the first character of that string
+        // takes the input of what you would like to convert to and gets the first character of that string
 
 
         System.out.println("Enter value: ");
         float value = scan.nextFloat();
         scan.close();
-    // takes the numerical value of what you would like to convert.
+        // takes the numerical value of what you would like to convert.
 
         char[] index = {'R', 'F', 'C', 'K'};
         int coord1 = 0;
@@ -39,7 +38,7 @@ public class main {
                 coord2 = j;
             }
         }
-    // creates two coordinate points based on the index array.
+        // creates two coordinate points based on the index array.
         goTo(coord1, coord2, value);
     }
 
@@ -48,14 +47,15 @@ public class main {
                                             {{"S","M","M"},        {"M","M","M"},     {"M","A","M"},   {"S","M","M"}},
                                             {{"S","M","M"},        {"S","M","M"},     {"M","M","M"},   {"S","M","M"}},
                                             {{"M","M","M"},        {"S","M","A"},     {"A","M","M"},   {"M","M","M"}}};
-        double[][][] conversionRatios =    {{{1.0,1.0,1.0},        {459.67,1.0,1.0},  {1.8,491.67},    {1.8,1.0,1.0}},
+
+        double[][][] conversionRatios =    {{{1.0,1.0,1.0},        {459.67,1.0,1.0},  {1.8,491.67,1.0},{1.8,1.0,1.0}},
                                             {{457.67,1.0,1.0},     {1.0,1.0,1.0},     {1.8,32,1.0},    {273,1.0,1.0}},
                                             {{491.67,0.55,1.0},    {32,.55,1.0},      {1.0,1.0,1.0},   {273,1.0,1.0}},
                                             {{.55,1.0,1.0},        {32,.55,273.},     {273,1.0,1.0},   {1.0,1.0,1.0}}};
 
-    // coordinate points are then used to in the 'findMatrix' matrix to identify what operation of calculation needs to be done
-    // then those same coordinate points are used in the 'conversionRatios' matrix to identify the values that the value inputted needs to
-    // be multiplied, added, or subtracted from.
+        // coordinate points are then used to in the 'findMatrix' matrix to identify what operation of calculation needs to be done
+        // then those same coordinate points are used in the 'conversionRatios' matrix to identify the values that the value inputted needs to
+        // be multiplied, added, or subtracted from.
         for (int z = 0; z < 3; z++) {
             switch(findMatrix[y][x][z]){
                 case("M"):
